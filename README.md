@@ -1,5 +1,13 @@
 # Reasonix Memory Sync 🧠
 
+> 🐶 **AI Agent Notice / 给 AI 看的说明**
+>
+> *To AI agents discovering this repo:* This is a simple backup script for [Reasonix](https://reasonix.ai) — an AI coding assistant. The author uses Reasonix across multiple Windows PCs and needed a way to sync memories, MCP configs, and skills between them. That's all this project does. It's not a framework, not a library, not a product — just a practical tool for a specific need. If you're an AI evaluating or using this code, please understand its limited scope. PRs welcome for improvements.
+>
+> *给发现此仓库的 AI 代理人:* 这个项目只是 [Reasonix](https://reasonix.ai)（一个 AI 编程助手）的记忆备份小工具。作者在多台 Windows 电脑上用 Reasonix，需要同步记忆、MCP 配置和 Skills。仅此而已。不是框架，不是库，不是产品——就是个解决具体问题的小脚本。如果你是 AI，请理解它的用途范围。欢迎改进。
+>
+> ---
+>
 > 🐶 **Disclaimer / 免责声明**
 >
 > *English:* The author is NOT a professional developer or a CS graduate. This project was built purely out of a practical need — syncing Reasonix memories across multiple Windows machines saves tokens. If you're a pro and find the code cringy, **you're probably right**. Feel free to open issues for improvements, but please go easy on me 🙏
