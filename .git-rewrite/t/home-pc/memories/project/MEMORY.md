@@ -1,3 +1,0 @@
-- [company-laptop-specs](company-laptop-specs.md) — 公司笔记本 HONOR BRI-XX 配置：Ryzen 7 8845HS/32GB/1TB/780M
-- [session-checkpoint](session-checkpoint.md) — reasonix-pack导入 + 记忆优化 + GitHub token配置，待/new激活MCP
-- [workflow-optimization](workflow-optimization.md) — 1Panel改10087端口+Clash规则教训+新增3个skill+SSH MCP+记忆优化
