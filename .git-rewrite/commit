@@ -1,0 +1,6 @@
+tree 834a778689285d579baa4f74bc42760cade82cf2
+parent a6b6b3ea8ae97d72079e3a2e6861266842fd1d73
+author chenMEME <58505283+chenMEME@users.noreply.github.com> 1779170416 +0800
+committer chenMEME <58505283+chenMEME@users.noreply.github.com> 1779170416 +0800
+
+docs: 更新 sync-memories skill 参考文档（引用 init + diff 命令）

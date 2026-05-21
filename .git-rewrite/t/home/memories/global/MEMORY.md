@@ -1,0 +1,21 @@
+- [check-before-delete](check-before-delete.md) — 删文件/快捷方式前先检查内容/指向，确认无害再删
+- [clash-rules-edit-lesson](clash-rules-edit-lesson.md) — 改Clash规则需通过增强模板(prepend)而非直接改主配置文件，否则不生效
+- [clash-verge-location](clash-verge-location.md) — Clash Verge 安装路径 G:\GTAV\clashverge，API端口9097，配置端口7897（家用机）
+- [communicate-during-long-tasks](communicate-during-long-tasks.md) — 多步操作每步都要说在干什么，别闷头想。用户看不到进度=你坏了
+- [config-json-bom-lesson](config-json-bom-lesson.md) — 改~/.reasonix/config.json必须用无BOM的UTF-8编码，否则Reasonix解析失败丢失配置
+- [default-browser-chrome](default-browser-chrome.md) — 必须用Chrome不要用夸克，Chrome设为默认浏览器
+- [install-default-d-drive](install-default-d-drive.md) — 软件默认装D盘，C盘仅60+GB。winget装C盘则手动搬
+- [launch-programs-like-human](launch-programs-like-human.md) — 先找桌面快捷方式打开程序，找不到再找原始路径
+- [mcp-server-fix-lesson](mcp-server-fix-lesson.md) — MCP连接不上时排查流程：查包是否存在、环境变量、全局安装代替npx
+- [mcp-servers-configured](mcp-servers-configured.md) — 已配5个MCP: memory/filesystem/github(90天token)/puppeteer/ssh(caikiji)
+- [memory-transfer-warning](memory-transfer-warning.md) — 用户打包记忆换机时，必须主动提醒哪些记忆含本地路径/配置，换机不通用
+- [pac-proxy-solution](pac-proxy-solution.md) — Clash Verge内置PAC模式，DeepSeek直连+省流量，重启不丢失
+- [session-auto-rotation](session-auto-rotation.md) — 会话80-100条轮换+checkpoint，新会话自动续接绝不问"之前干了啥"（合并了length-guideline和init-rules）
+- [superpowers-bootstrap](superpowers-bootstrap.md) — 每轮回复前检查可用skill，brainstorming→debug→TDD优先
+- [token-efficiency](token-efficiency.md) — 最短token完成任务：先看提示词后动工具、批量操作、不轮询、不重复踩坑
+- [tool-retry-limit-3](tool-retry-limit-3.md) — 同一工具重试>3次立即停止，避免浪费token
+- [user-role-bid-tech](user-role-bid-tech.md) — 用户职责：写标书、做技术。项目工作区：G:\reasonix
+- [user-workflow-rules](user-workflow-rules.md) — /plan优先、VPN桌面可见、信任会话批量确认
+- [vps-64-83-39-99](vps-64-83-39-99.md) — VPS 64.83.39.99 root/kxjhLd5TNXzf，莱卡云，1Panel中转站
+- [web-fetch-proxy-lesson](web-fetch-proxy-lesson.md) — web_fetch不走Clash代理，翻墙时得用curl --proxy代替
+- [web-search-skill-works](web-search-skill-works.md) — web-search skill通过Clash代理(7897)成功搜索，替代内置web_search

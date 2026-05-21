@@ -1,0 +1,10 @@
+{
+  "mcp": [
+    "memory=npx -y @modelcontextprotocol/server-memory",
+    "filesystem=npx -y @modelcontextprotocol/server-filesystem {{WORKSPACE}}",
+    "github=npx -y @modelcontextprotocol/server-github",
+    "chrome-devtools=npx -y chrome-devtools-mcp@latest"
+  ],
+  "editMode": "yolo",
+  "note": "脱敏版本 — SSH MCP 已移除（需自行配置），路径用占位符"
+}
