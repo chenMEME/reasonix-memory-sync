@@ -587,7 +587,7 @@ async function cmdDeploy() {
 
     // ── 5. Pre-deploy backup ──
     const preDeployTs = new Date().toISOString().replace(/[:.]/g, '-');
-    const preDeployDir = path.join(reasonixDir, `pre-deploy-${preDeployTs}`);
+    const preDeployDir = path.join(homeDir, `.reasonix.pre-deploy-${preDeployTs}`);
     if (fs.existsSync(reasonixDir)) {
       copyDir(reasonixDir, preDeployDir);
       log(`当前 ~/.reasonix 已备份到 ${preDeployDir}`);
@@ -989,14 +989,14 @@ function sanitizeText(text, level3Pairs, excludedFiles, filename, log) {
 
   // --- 级别3: PathPairs 精确替换 (优先于级别2, 避免被通用模式覆盖) ---
   for (const { pattern, placeholder } of level3Pairs) {
-    let count = 0;
-    let prev;
-    do {
-      prev = result;
-      result = result.replace(pattern, placeholder);
-      if (result !== prev) count++;
-    } while (result !== prev);
-    if (count > 0) record(`L3:pathPair(${placeholder})`, count);
+    // 使用 split-join 一次性替换所有出现，避免 do-while 递归嵌套 bug:
+    // 当 placeholder 包含 pattern 作为子串时，do-while 会反复重新引入匹配 → 无限循环
+    const parts = result.split(pattern);
+    const count = parts.length - 1;
+    if (count > 0) {
+      result = parts.join(placeholder);
+      record(`L3:pathPair(${placeholder})`, count);
+    }
   }
 
   // --- 级别2: 模式匹配 ---
