@@ -1423,6 +1423,31 @@ async function cmdCollect() {
   log(`收集完成: ${globalMemories.length} 条全局, ${projectMemories.length} 条项目, ${skills.length} 个 skill`);
 }
 
+// ============ redact 命令 ============
+
+function cmdRedact() {
+  const sub = process.argv[3] || 'list';
+  const cfg = readSyncConfig() || {};
+  const rc = cfg.redact || { enabled: true, rules: [] };
+
+  if (sub === 'list') {
+    console.log(JSON.stringify(rc, null, 2));
+  } else if (sub === 'off') {
+    rc.enabled = false;
+  } else if (sub === 'on') {
+    rc.enabled = true;
+  } else if (sub === 'add' && process.argv[4] && process.argv[5]) {
+    rc.rules.push({ from: process.argv[4], to: process.argv[5] });
+  } else {
+    log('用法: node sync.js redact [list|on|off|add <pattern> <placeholder>]');
+    return;
+  }
+  cfg.redact = rc;
+  fs.writeFileSync(syncConfigPath, JSON.stringify(cfg, null, 2), 'utf8');
+  log('redact 规则已更新:', JSON.stringify(rc));
+}
+
+
 // ============ 主入口 ============
 
 const action = process.argv[2];
@@ -1449,6 +1474,7 @@ const action = process.argv[2];
       case 'inspect':   await cmdInspect(); break;
       case 'pathpair':  cmdPathpair(); break;
       case 'exclude':   cmdExclude(); break;
+      case 'redact':    cmdRedact(); break;
       default:
         console.log(`
 用法:
@@ -1466,6 +1492,7 @@ const action = process.argv[2];
   node sync.js sanitize < input.json > output.json    执行脱敏
   node sync.js inspect < input.json                    预览脱敏效果
   node sync.js pathpair add|remove|list                管理路径映射
+  node sync.js redact list|on|off|add <pat> <ph>    管理脱敏规则
   node sync.js exclude add|remove|list                 管理排除文件列表
 `);
     }
