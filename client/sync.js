@@ -135,6 +135,21 @@ function cmdInit() {
   console.log(JSON.stringify({ success: true, config }));
 }
 
+// ============ 脱敏 ============
+
+function redactText(text, ws) {
+  const hd = homeDir.replace(/\\/g, '\\\\');
+  const patterns = [
+    { re: new RegExp(hd, 'gi'), ph: '[HOME_DIR]' },
+    { re: new RegExp(os.hostname(), 'gi'), ph: '[HOSTNAME]' },
+    { re: new RegExp(os.userInfo().username, 'gi'), ph: '[USERNAME]' },
+  ];
+  if (ws) patterns.push({ re: new RegExp(ws.replace(/\\/g, '\\\\'), 'gi'), ph: '[WORKSPACE]' });
+  let r = text;
+  for (const p of patterns) r = r.replace(p.re, p.ph);
+  return r;
+}
+
 // ============ collect ============
 
 function collectData() {
@@ -172,13 +187,15 @@ function collectData() {
   }
 
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+  const _ws = ws || '';
+  const _r = (arr) => arr.map(m => ({ ...m, content: redactText(m.content, _ws) }));
 
   return {
     computer: computerId,
     timestamp,
-    workspace: ws,
-    memories: { global: globalMemories, project: projectMemories },
-    skills,
+    workspace: _ws,
+    memories: { global: _r(globalMemories), project: _r(projectMemories) },
+    skills: _r(skills),
     config: config ? { ...config, apiKey: '[FILTERED]' } : null,
   };
 }
