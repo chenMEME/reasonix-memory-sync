@@ -1,0 +1,39 @@
+name: Verify Backup Integrity
+
+on:
+  push:
+  schedule:
+    - cron: '0 8 * * *'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - name: Run test suite
+        run: node tests/sync.test.js
+      - name: Verify backup manifests
+        run: |
+          BACKUPS=$(find backup -name "manifest.json" 2>/dev/null | wc -l)
+          echo "Backup manifests: $BACKUPS"
+          LATEST=$(find backup -name "manifest.json" -type f 2>/dev/null | sort -r | head -1)
+          if [ -n "$LATEST" ]; then
+            echo "Latest: $LATEST"
+            node -e "
+              const fs=require('fs'), crypto=require('crypto'), path=require('path');
+              const m=JSON.parse(fs.readFileSync('$LATEST','utf8'));
+              const dir=path.dirname('$LATEST');
+              let ok=0, fail=0;
+              for(const f of m){
+                try{
+                  const d=fs.readFileSync(path.join(dir,f.path));
+                  const h=crypto.createHash('sha256').update(d).digest('hex');
+                  if(h===f.sha256) ok++; else{ fail++; console.log('  ❌ hash:',f.path); }
+                }catch{ fail++; console.log('  ❌ missing:',f.path); }
+              }
+              console.log('  '+ok+' OK, '+fail+' FAIL');
+              if(fail>0) process.exit(1);
+            "
+          else echo "No backups yet - skipping verify"
